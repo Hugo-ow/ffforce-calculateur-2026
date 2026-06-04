@@ -235,7 +235,7 @@ select option{background:var(--surface)}
 }
 .gl-val{
   font-family:var(--mono);font-size:24px;font-weight:500;
-  color:var(--mental)
+  color:var(--t1)
 }
 .gl-bar-side{flex:1}
 .gl-bar-labels{
@@ -243,7 +243,7 @@ select option{background:var(--surface)}
   font-size:9px;color:var(--t3);margin-bottom:4px
 }
 .gl-track{height:4px;background:var(--divider);border-radius:10px;overflow:hidden}
-.gl-fill{height:100%;border-radius:10px;background:var(--mental);width:0%;transition:width .7s cubic-bezier(.34,1.56,.64,1)}
+.gl-fill{height:100%;border-radius:10px;background:var(--t1);width:0%;transition:width .7s cubic-bezier(.34,1.56,.64,1)}
 
 /* GL Tooltip */
 .gl-tip{
@@ -278,9 +278,9 @@ select option{background:var(--surface)}
 }
 .block-title::before{content:'';width:2px;height:12px;border-radius:2px;flex-shrink:0}
 .bt-red  .block-title{color:var(--t2)}.bt-red  .block-title::before{background:var(--red)}
-.bt-prog .block-title{color:var(--t2)}.bt-prog .block-title::before{background:var(--prog)}
+.bt-prog .block-title{color:var(--t2)}.bt-prog .block-title::before{background:var(--red)}
 .bt-mental .block-title{color:var(--t2)}.bt-mental .block-title::before{background:var(--mental)}
-.bt-rehab .block-title{color:var(--t2)}.bt-rehab .block-title::before{background:var(--rehab)}
+.bt-rehab .block-title{color:var(--t2)}.bt-rehab .block-title::before{background:var(--red)}
 
 /* ── ROAD TO NEXT ── */
 .next-tag{
@@ -343,11 +343,11 @@ select option{background:var(--surface)}
 
 /* ── COACHING ── */
 .coach-insight{
-  background:var(--bg2);border-left:2px solid var(--rehab);
+  background:var(--bg2);border-left:2px solid var(--border);
   border-radius:0 var(--r-input) var(--r-input) 0;
   padding:12px 14px;margin-bottom:14px
 }
-.coach-insight-lbl{font-size:9px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--rehab);margin-bottom:5px}
+.coach-insight-lbl{font-size:9px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
 .coach-insight-txt{font-size:13px;color:var(--t1);line-height:1.6}
 
 .bars{display:flex;flex-direction:column;gap:12px}
@@ -435,6 +435,87 @@ select option{background:var(--surface)}
 .cta-btn-arrow{font-size:16px;transition:transform .15s}
 .cta-btn:hover .cta-btn-arrow{transform:translateX(3px)}
 .cta-note{font-size:10px;color:var(--t3);text-align:center;margin-top:10px}
+
+/* ── SIMULATEUR ── */
+.sim-block{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-card);padding:18px 16px;margin-bottom:10px
+}
+.sim-title{
+  font-size:10px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;
+  margin-bottom:4px;display:flex;align-items:center;gap:8px;color:var(--t2)
+}
+.sim-title::before{content:'';width:2px;height:12px;border-radius:2px;background:var(--red);flex-shrink:0}
+.sim-subtitle{font-size:11px;color:var(--t3);margin-bottom:16px}
+
+.sim-sliders{display:flex;flex-direction:column;gap:14px}
+.sim-row{}
+.sim-row-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sim-row-label{font-size:11px;font-weight:600;color:var(--t2);letter-spacing:.2px}
+.sim-row-vals{display:flex;align-items:center;gap:6px}
+.sim-base{font-family:var(--mono);font-size:11px;color:var(--t3)}
+.sim-plus{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  color:var(--red);min-width:52px;text-align:right
+}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:4px;border-radius:10px;outline:none;cursor:pointer;
+  background:var(--divider);
+  transition:background .15s;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--red);border:2px solid var(--surface);
+  box-shadow:0 0 0 3px rgba(230,57,70,.2);
+  cursor:pointer;transition:box-shadow .15s;
+}
+input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 5px rgba(230,57,70,.25)}
+input[type=range]::-moz-range-thumb{
+  width:18px;height:18px;border-radius:50%;
+  background:var(--red);border:2px solid var(--surface);cursor:pointer;
+}
+
+.sim-result{
+  margin-top:16px;background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r-input);padding:14px;
+}
+.sim-result-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.sim-result-label{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--t3)}
+.sim-total-wrap{display:flex;align-items:baseline;gap:6px}
+.sim-total{font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--t1)}
+.sim-total-delta{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--red)}
+.sim-divider{height:1px;background:var(--divider);margin-bottom:12px}
+.sim-level-row{display:flex;justify-content:space-between;align-items:center}
+.sim-level-label{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--t3)}
+.sim-level-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 14px;border-radius:100px;
+  border:1px solid var(--lc2,var(--border));
+  background:color-mix(in srgb,var(--lc2,transparent) 10%,transparent);
+  font-size:14px;font-weight:800;
+  color:var(--lc2,var(--t2));letter-spacing:.3px;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1)
+}
+.sim-level-up{
+  font-size:10px;font-weight:600;letter-spacing:.5px;
+  color:var(--red);padding:3px 8px;border-radius:100px;
+  background:rgba(230,57,70,.08);border:1px solid rgba(230,57,70,.25)
+}
+.sim-road{margin-top:10px}
+.sim-road-nums{display:flex;justify-content:space-between;font-size:10px;color:var(--t3);margin-bottom:4px}
+.sim-road-nums strong{font-family:var(--mono);color:var(--t1);font-weight:500}
+.sim-road-track{height:4px;background:var(--divider);border-radius:10px;overflow:hidden}
+.sim-road-fill{height:100%;border-radius:10px;transition:width .4s cubic-bezier(.34,1.56,.64,1)}
+.sim-reset{
+  width:100%;margin-top:10px;padding:8px;
+  background:transparent;border:1px solid var(--border);
+  border-radius:var(--r-input);color:var(--t3);
+  font-family:var(--font);font-size:11px;font-weight:500;
+  cursor:pointer;transition:all .15s;
+}
+.sim-reset:hover{border-color:var(--t3);color:var(--t2)}
 
 /* ── TOAST ── */
 #toast{
@@ -557,6 +638,7 @@ select option{background:var(--surface)}
         <p>Score officiel de l'IPF permettant de <strong>comparer équitablement les performances entre toutes les catégories de poids et genres</strong>.</p>
         <p><strong>100 pts = élite mondiale.</strong> Niveau national : 70–90 pts. Premiers pas en compétition : 40–60 pts.</p>
         <p>Formule : <strong>100 × Total ÷ f(poids de corps)</strong>, coefficients IPF 2020.</p>
+        <p style="margin-top:8px;padding-top:8px;border-top:1px solid var(--divider);font-size:11px;color:var(--t3)">Source : <a href="https://www.openipf.org" target="_blank" rel="noopener" style="color:var(--t3);text-decoration:underline;text-underline-offset:2px">openipf.org</a> · +400 000 compétiteurs mondiaux vérifiés</p>
       </div>
     </div>
   </div>
@@ -583,6 +665,65 @@ select option{background:var(--surface)}
   <div class="block bt-rehab fade-up" id="block-coach">
     <div class="block-title">Analyse & Focus</div>
     <div id="coach-body"></div>
+  </div>
+
+  <!-- SIMULATEUR -->
+  <div class="sim-block fade-up" id="block-sim" style="display:none">
+    <div class="sim-title">Simulateur de progression</div>
+    <p class="sim-subtitle">Ajoute des kilos sur chaque mouvement et vois ton niveau projeté</p>
+    <div class="sim-sliders">
+      <div class="sim-row">
+        <div class="sim-row-header">
+          <div class="sim-row-label">Squat</div>
+          <div class="sim-row-vals">
+            <span class="sim-base" id="sim-base-sq">— kg</span>
+            <span class="sim-plus" id="sim-plus-sq">+0 kg</span>
+          </div>
+        </div>
+        <input type="range" id="sim-sq" min="0" max="60" step="2.5" value="0" oninput="simUpdate()">
+      </div>
+      <div class="sim-row">
+        <div class="sim-row-header">
+          <div class="sim-row-label">Bench</div>
+          <div class="sim-row-vals">
+            <span class="sim-base" id="sim-base-bp">— kg</span>
+            <span class="sim-plus" id="sim-plus-bp">+0 kg</span>
+          </div>
+        </div>
+        <input type="range" id="sim-bp" min="0" max="60" step="2.5" value="0" oninput="simUpdate()">
+      </div>
+      <div class="sim-row">
+        <div class="sim-row-header">
+          <div class="sim-row-label">Deadlift</div>
+          <div class="sim-row-vals">
+            <span class="sim-base" id="sim-base-dl">— kg</span>
+            <span class="sim-plus" id="sim-plus-dl">+0 kg</span>
+          </div>
+        </div>
+        <input type="range" id="sim-dl" min="0" max="60" step="2.5" value="0" oninput="simUpdate()">
+      </div>
+    </div>
+
+    <div class="sim-result">
+      <div class="sim-result-row">
+        <div class="sim-result-label">Total projeté</div>
+        <div class="sim-total-wrap">
+          <div class="sim-total" id="sim-total">—</div>
+          <div class="sim-total-delta" id="sim-delta"></div>
+        </div>
+      </div>
+      <div class="sim-divider"></div>
+      <div class="sim-level-row">
+        <div class="sim-level-label">Niveau projeté</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="sim-level-badge" id="sim-badge">—</div>
+          <div class="sim-level-up" id="sim-levelup" style="display:none">↑ Niveau supérieur</div>
+        </div>
+      </div>
+      <div class="sim-road" id="sim-road"></div>
+    </div>
+
+    <button class="sim-reset" onclick="simReset()">Réinitialiser les sliders</button>
   </div>
 
   <!-- CTA FORCEUX -->
@@ -741,7 +882,7 @@ function compute(){
   var hero=G('hero');
   hero.style.setProperty('--lc',m.c);
   hero.classList.add('lit');
-  G('r-total').textContent=fmt(total)+' kg';
+  countUp(G('r-total'), total, 900);
   G('r-icon').textContent=m.i;
   G('r-level').textContent=lv;
   G('r-level').style.color=m.c;
@@ -797,7 +938,9 @@ function compute(){
         '</div>';
       }).join('')+
       '</div>'+
-      (frD&&wwD?'<div class="pct-footer">Moy. FR '+fmt(frD.Total)+' kg · Monde '+fmt(wwD.Total)+' kg · GL FR '+fmt(frD.Goodlift)+' pts</div>':'');
+      (frD&&wwD?'<div class="pct-footer">Moy. FR '+fmt(frD.Total)+' kg · Monde '+fmt(wwD.Total)+' kg · GL FR '+fmt(frD.Goodlift)+' pts<br><a href="https://www.openipf.org" target="_blank" rel="noopener" style="color:var(--t3);text-decoration:underline;text-underline-offset:2px;font-size:10px">openipf.org</a> · Moyennes mondiales basées sur +400 000 compétiteurs vérifiés</div>':
+       (wwD&&!frD?'<div class="pct-footer"><a href="https://www.openipf.org" target="_blank" rel="noopener" style="color:var(--t3);text-decoration:underline;text-underline-offset:2px;font-size:10px">openipf.org</a> · Moyennes mondiales basées sur +400 000 compétiteurs vérifiés</div>':
+       (frD&&!wwD?'<div class="pct-footer">Moyennes France · <a href="https://www.openipf.org" target="_blank" rel="noopener" style="color:var(--t3);text-decoration:underline;text-underline-offset:2px;font-size:10px">openipf.org</a></div>':'')));
     G('block-pct').style.display='';
   } else { G('block-pct').style.display='none'; }
 
@@ -898,6 +1041,9 @@ function compute(){
     var wk=lif.slice().sort(function(a,b){ return (b.a-b.v)-(a.a-a.v); })[0];
     if(wk&&wk.a>wk.v) alert2='<div class="cta-alert">Ton <strong>'+wk.n+'</strong> est en dessous de la moyenne nationale dans ta catégorie — c\'est précisément ce type de point faible qui est traité en détail dans l\'académie.</div>';
   }
+  /* Init simulateur avec les valeurs calculées */
+  simInit(gender,cat,wc,sq,bp,dl,lv);
+
   G('cta-box').innerHTML=
     '<div class="cta-eyebrow">Forceux Académie</div>'+
     '<div class="cta-headline">'+c2.h+'</div>'+
@@ -906,6 +1052,109 @@ function compute(){
     '<div class="cta-pills">'+c2.pills.map(function(p){ return '<span class="cta-pill">'+p+'</span>'; }).join('')+'</div>'+
     '<a href="https://www.forceux.fr/" target="_blank" rel="noopener" class="cta-btn"><span>'+c2.cta+'</span><span class="cta-btn-arrow">→</span></a>'+
     '<div class="cta-note">forceux.fr</div>';
+}
+
+/* ═══════ COUNT-UP ANIMATION ═══════ */
+function countUp(el, target, duration) {
+  var start = 0;
+  var startTime = null;
+  /* Ease out cubic */
+  function ease(t){ return 1 - Math.pow(1 - t, 3); }
+  function step(timestamp){
+    if(!startTime) startTime = timestamp;
+    var elapsed = timestamp - startTime;
+    var progress = Math.min(elapsed / duration, 1);
+    var current = Math.round(ease(progress) * target * 2) / 2; /* steps of 0.5 */
+    el.textContent = current % 1 === 0 ? String(current) + ' kg' : current.toFixed(1) + ' kg';
+    if(progress < 1) requestAnimationFrame(step);
+    else el.textContent = (target % 1 === 0 ? String(target) : target.toFixed(1)) + ' kg';
+  }
+  requestAnimationFrame(step);
+}
+
+/* ═══════ SIMULATEUR ═══════ */
+/* Variables partagées avec compute() */
+var _simGender='M', _simCat=null, _simWC=null, _simSq=0, _simBp=0, _simDl=0, _simLv='Départemental';
+
+function simInit(gender,cat,wc,sq,bp,dl,lv){
+  _simGender=gender; _simCat=cat; _simWC=wc;
+  _simSq=sq; _simBp=bp; _simDl=dl; _simLv=lv;
+  /* Labels de base */
+  G('sim-base-sq').textContent=fmt(sq)+' kg';
+  G('sim-base-bp').textContent=fmt(bp)+' kg';
+  G('sim-base-dl').textContent=fmt(dl)+' kg';
+  /* Reset sliders */
+  G('sim-sq').value=0; G('sim-bp').value=0; G('sim-dl').value=0;
+  G('sim-plus-sq').textContent='+0 kg';
+  G('sim-plus-bp').textContent='+0 kg';
+  G('sim-plus-dl').textContent='+0 kg';
+  simUpdate();
+  G('block-sim').style.display='';
+}
+
+function simUpdate(){
+  var dSq=parseFloat(G('sim-sq').value)||0;
+  var dBp=parseFloat(G('sim-bp').value)||0;
+  var dDl=parseFloat(G('sim-dl').value)||0;
+
+  /* Labels sliders */
+  G('sim-plus-sq').textContent=(dSq>0?'+':'')+fmt(dSq)+' kg';
+  G('sim-plus-bp').textContent=(dBp>0?'+':'')+fmt(dBp)+' kg';
+  G('sim-plus-dl').textContent=(dDl>0?'+':'')+fmt(dDl)+' kg';
+
+  var baseTot=_simSq+_simBp+_simDl;
+  var projSq=_simSq+dSq, projBp=_simBp+dBp, projDl=_simDl+dDl;
+  var projTot=projSq+projBp+projDl;
+  var delta=projTot-baseTot;
+
+  /* Total projeté */
+  G('sim-total').textContent=fmt(projTot)+' kg';
+  G('sim-delta').textContent=delta>0?'+'+fmt(delta)+' kg':'';
+
+  /* Niveau projeté */
+  var res=getLevel(projTot,_simGender,_simCat,_simWC);
+  var lv=res.level, m=META[lv]||META['Départemental'];
+  var next=getNext(res.idx,res.thr);
+
+  var badge=G('sim-badge');
+  badge.style.setProperty('--lc2',m.c);
+  badge.textContent=m.i+' '+lv;
+
+  /* Indicateur niveau supérieur */
+  var lvUp=G('sim-levelup');
+  if(lv!==_simLv){
+    lvUp.style.display='';
+    lvUp.textContent='↑ +1 niveau';
+  } else {
+    lvUp.style.display='none';
+  }
+
+  /* Barre vers prochain niveau */
+  var road=G('sim-road');
+  if(!next){
+    road.innerHTML='<div style="font-size:11px;color:var(--nutri);margin-top:6px;font-weight:600">🏆 Niveau maximum atteint</div>';
+  } else {
+    var nm=META[next.name]||{};
+    var gap=Math.max(0,next.val-projTot);
+    var prev=res.idx>=0?(res.thr[res.idx]||0):0;
+    var p=Math.max(0,(next.val-prev))>0?Math.min(100,Math.round(((projTot-prev)/(next.val-prev))*100)):0;
+    road.innerHTML=
+      '<div class="sim-road-nums" style="margin-top:8px">'+
+        '<span>Vers <strong style="color:'+m.c+'">'+next.name+'</strong></span>'+
+        '<span style="font-family:var(--mono);color:var(--t3);font-size:10px">−'+fmt(gap)+' kg</span>'+
+      '</div>'+
+      '<div class="sim-road-track">'+
+        '<div class="sim-road-fill" style="width:'+p+'%;background:'+m.c+'"></div>'+
+      '</div>';
+  }
+}
+
+function simReset(){
+  G('sim-sq').value=0; G('sim-bp').value=0; G('sim-dl').value=0;
+  G('sim-plus-sq').textContent='+0 kg';
+  G('sim-plus-bp').textContent='+0 kg';
+  G('sim-plus-dl').textContent='+0 kg';
+  simUpdate();
 }
 
 /* ── GL Tooltip ── */
