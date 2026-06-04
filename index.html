@@ -436,6 +436,18 @@ select option{background:var(--surface)}
 .cta-btn:hover .cta-btn-arrow{transform:translateX(3px)}
 .cta-note{font-size:10px;color:var(--t3);text-align:center;margin-top:10px}
 
+/* ── PROFILE CHIPS ── */
+.profile-chips{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.profile-chip{
+  display:inline-flex;flex-direction:column;gap:2px;
+  padding:8px 12px;background:var(--bg2);
+  border:1px solid var(--border);border-radius:var(--r-input);
+  flex:1;min-width:0;
+}
+.profile-chip-label{font-size:9px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--t3)}
+.profile-chip-value{font-size:13px;font-weight:600;color:var(--t2)}
+.profile-chip.ready .profile-chip-value{color:var(--t1)}
+
 /* ── SIMULATEUR ── */
 .sim-block{
   background:var(--surface);border:1px solid var(--border);
@@ -560,7 +572,7 @@ input[type=range]::-moz-range-thumb{
 <!-- FORMULAIRE PROFIL -->
 <div class="card">
   <div class="section-label">Profil</div>
-  <div class="fg-2" style="margin-bottom:8px">
+  <div class="fg-2" style="margin-bottom:8px;row-gap:8px">
     <div class="fgroup">
       <label class="flabel" for="i-gender">Sexe</label>
       <select id="i-gender">
@@ -572,15 +584,22 @@ input[type=range]::-moz-range-thumb{
       <label class="flabel" for="i-age">Âge</label>
       <input id="i-age" type="number" inputmode="decimal" pattern="[0-9]*" placeholder="ex : 26" min="10" max="90">
     </div>
-    <div class="fgroup">
+    <div class="fgroup" style="grid-column:1/-1">
       <label class="flabel" for="i-bw">Poids de corps <span style="color:var(--t3);font-weight:400">(kg)</span></label>
       <input id="i-bw" type="number" inputmode="decimal" pattern="[0-9]*" placeholder="ex : 83" min="30" max="300" step="0.5">
     </div>
-    <div class="fgroup">
-      <label class="flabel">Division</label>
-      <div class="auto-chip" id="auto-chip">—</div>
-    </div>
   </div>
+    <!-- Chips division + catégorie poids -->
+    <div class="profile-chips" id="profile-chips" style="display:none">
+      <div class="profile-chip" id="chip-div">
+        <span class="profile-chip-label">Division</span>
+        <span class="profile-chip-value" id="chip-div-val">—</span>
+      </div>
+      <div class="profile-chip" id="chip-wc">
+        <span class="profile-chip-label">Catégorie IPF</span>
+        <span class="profile-chip-value" id="chip-wc-val">—</span>
+      </div>
+    </div>
 </div>
 
 <!-- FORMULAIRE MAX -->
@@ -620,6 +639,8 @@ input[type=range]::-moz-range-thumb{
       <span class="level-badge-icon" id="r-icon"></span>
       <span class="level-badge-name" id="r-level">—</span>
     </div>
+    <!-- Catégorie -->
+    <div id="hero-cat" style="display:none;margin-top:10px;gap:8px;flex-wrap:wrap;justify-content:center"></div>
     <!-- GL Points -->
     <div class="gl-wrap">
       <div class="gl-row" onclick="toggleTip()">
@@ -838,14 +859,24 @@ function preview(){
   var bp    =parseFloat(G('i-bp').value)||0;
   var dl    =parseFloat(G('i-dl').value)||0;
 
-  var cat=ageToCat(age), chip=G('auto-chip');
-  if(cat){ chip.textContent=CAT_LBL[cat]; chip.classList.add('ready'); }
-  else   { chip.textContent='—';          chip.classList.remove('ready'); }
+  var cat=ageToCat(age);
 
   var wc=(bw>0&&cat)?getWC(bw,gender,cat):null;
   var ready=!!(cat&&wc&&sq>0&&bp>0&&dl>0);
   var btn=G('btn-reveal');
   btn.classList.toggle('dimmed',!ready);
+
+  /* Profile chips — division + catégorie poids */
+  var chips=G('profile-chips');
+  if(cat && wc){
+    G('chip-div-val').textContent = CAT_LBL[cat];
+    G('chip-wc-val').textContent  = wc+' kg';
+    G('chip-div').classList.add('ready');
+    G('chip-wc').classList.add('ready');
+    chips.style.display='flex';
+  } else {
+    chips.style.display='none';
+  }
 
   localStorage.setItem('fa_v4',JSON.stringify({gender:gender,age:age,bw:bw,sq:sq,bp:bp,dl:dl}));
 }
@@ -890,6 +921,14 @@ function compute(){
   badge.style.borderColor=m.c;
   badge.style.background='color-mix(in srgb,'+m.c+' 10%,transparent)';
   badge.classList.remove('pop'); void badge.offsetWidth; badge.classList.add('pop');
+  /* Hero — catégorie chips */
+  var heroCat=G('hero-cat');
+  if(heroCat){
+    heroCat.style.display='flex';
+    heroCat.innerHTML=
+      '<span style="padding:4px 10px;border-radius:100px;background:var(--bg2);border:1px solid var(--border);font-size:11px;font-weight:500;color:var(--t3)">'+CAT_LBL[cat]+'</span>'+
+      '<span style="padding:4px 10px;border-radius:100px;background:var(--bg2);border:1px solid var(--border);font-size:11px;font-weight:600;color:var(--t2)">'+wc+' kg</span>';
+  }
   G('r-gl').textContent=fmt(gl);
   setTimeout(function(){ var b=G('r-gl-bar'); if(b) b.style.width=Math.min(gl,100)+'%'; },120);
 
