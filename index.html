@@ -1064,15 +1064,15 @@ function compute(){
 
   /* ── CTA FORCEUX ── */
   var CTAS={
-    'Départemental':{h:'Construis tes <span>bases</span> intelligemment',b:'Des fondations solides dès le départ évitent des années de stagnation. Apprends à structurer ta progression et à t\'autocoacher efficacement.',cta:'Commencer du bon pied',pills:['Fondamentaux','Programmation','Technique']},
-    'R3':{h:'Le vrai travail commence <span>maintenant</span>',b:'Tu as les bases. La prochaine étape : comprendre ta programmation pour ne pas avancer à l\'aveugle et gagner tes premiers niveaux plus vite.',cta:'Structurer ma progression',pills:['Programmation','Autocoaching','Périodisation']},
-    'R2':{h:'Évite les <span>plateaux</span> qui bloquent la majorité',b:'La différence entre les athlètes qui progressent et ceux qui stagnent ne tient pas à l\'effort, mais à l\'intelligence de l\'entraînement.',cta:'Briser mes plateaux',pills:['Gestion des plateaux','Ratios SQ/BP/DL','Récupération']},
-    'R1':{h:'Tu touches au <span>niveau national</span>',b:'Franchir N2 demande une vraie stratégie, pas juste plus de volume. Apprends à identifier et corriger tes points faibles avec précision.',cta:'Viser le niveau national',pills:['Niveau national','Points faibles','Pic de forme']},
-    'N2':{h:'Les gains viennent maintenant des <span>détails</span>',b:'Technique, pic de forme, récupération, gestion de l\'intensité — à ce niveau chaque variable compte. Forceux Académie t\'aide à les maîtriser.',cta:'Affiner ma performance',pills:['Optimisation','Technique','Gestion de l\'intensité']},
-    'N1':{h:'Elite nationale — vise <span>l\'Europe</span>',b:'Tu fais partie des meilleurs en France. Les ressources Forceux Académie te donnent les outils pour franchir le palier européen.',cta:'Passer au niveau européen',pills:['Niveau européen','Compétition élite','Analyse avancée']},
-    'Europe':{h:'Niveau européen — <span>élite absolue</span>',b:'Des ressources pour les athlètes qui repoussent les limites au plus haut niveau.',cta:'Explorer les ressources élite',pills:['Élite européenne','Haut niveau','Analyse poussée']},
-    'Monde':{h:'<span>Niveau mondial</span> — tu es une référence',b:'Partage ton expérience ou rejoins la communauté Forceux pour transmettre.',cta:'Rejoindre la communauté',pills:['Top mondial','Communauté','Transmission']}
-  };
+    'Départemental':{h:'Bienvenue dans la <span>communauté Forceux</span>',b:'Tout le monde démarre quelque part. Rejoins une communauté gratuite de forceux qui partagent leurs entraînements, posent leurs questions et célèbrent leurs PRs — quel que soit ton niveau.',pills:['Tous niveaux','Échanges','Entraide']},
+    'R3':{h:'Tu progresses — entourne-toi des <span>bonnes personnes</span>',b:"La progression est plus rapide quand on s'entraîne entouré d'athlètes qui comprennent les mêmes défis. Rejoins une communauté gratuite pour partager tes séances et apprendre des autres.",pills:['Partage de séances','Conseils','PRs']},
+    'R2':{h:'Rejoins des athlètes qui <span>comprennent tes défis</span>',b:"Plateaux, ratios déséquilibrés, gestion de la fatigue — ces sujets sont au cœur des échanges dans la communauté. Viens poser tes questions et partager tes victoires.",pills:['Analyse','Plateaux','Récupération']},
+    'R1':{h:'Le niveau national se construit <span>en communauté</span>',b:"Les athlètes R1 qui passent N2 ne le font jamais seuls. Rejoins des forceux ambitieux, partage tes PRs et accède aux discussions qui font progresser.",pills:['Niveau national','PRs','Stratégie']},
+    'N2':{h:'Partage ton niveau — <span>inspire la communauté</span>',b:"À ton niveau, tu as autant à apprendre qu'à transmettre. La communauté Forceux réunit des athlètes de tous niveaux qui échangent sur les détails qui font la différence.",pills:['Échanges','Technique','Partage']},
+    'N1':{h:"L'élite nationale a sa place dans la <span>communauté</span>",b:"Les meilleurs athlètes français de force athlétique se retrouvent ici. Partage ton expérience, échange sur la compétition et inspire la prochaine génération.",pills:['Élite française','Compétition','Mentorat']},
+    'Europe':{h:'Niveau européen — partage ton <span>expérience</span>',b:"Ta progression et tes performances sont une source d'inspiration pour toute une communauté. Rejoins-nous gratuitement et fais partie des références de Forceux Académie.",pills:['Référence','Partage','Communauté']},
+    'Monde':{h:'<span>Niveau mondial</span> — tu es une référence',b:"Rejoins la communauté Forceux et transmets ton expérience à des athlètes qui aspirent à ton niveau. Ta présence a de la valeur pour tous.",pills:['Top mondial','Transmission','Inspiration']}
+  }
   var c2=CTAS[lv]||CTAS['R3'];
   var alert2='';
   if(frD){
@@ -1089,8 +1089,8 @@ function compute(){
     '<div class="cta-body">'+c2.b+'</div>'+
     alert2+
     '<div class="cta-pills">'+c2.pills.map(function(p){ return '<span class="cta-pill">'+p+'</span>'; }).join('')+'</div>'+
-    '<a href="https://www.forceux.fr/" target="_blank" rel="noopener" class="cta-btn"><span>'+c2.cta+'</span><span class="cta-btn-arrow">→</span></a>'+
-    '<div class="cta-note">forceux.fr</div>';
+    '<a href="https://whop.com/forceux-academie/rejoindre-gratuit/" target="_blank" rel="noopener" class="cta-btn"><span>Rejoindre la communauté</span><span class="cta-btn-arrow">→</span></a>'+
+    '<div class="cta-note">100% gratuit · Accès instantané</div>';
 }
 
 /* ═══════ COUNT-UP ANIMATION ═══════ */
