@@ -531,7 +531,7 @@ input[type=range]::-moz-range-thumb{
 
 .pct-tabs{display:flex;gap:6px;margin-bottom:12px}
 .pct-tab{flex:1;padding:9px 8px;border-radius:var(--r-input);background:var(--bg2);border:1px solid var(--border);font-size:11px;font-weight:600;text-transform:uppercase;color:var(--t3);cursor:pointer;text-align:center;transition:all .2s cubic-bezier(.4,0,.2,1);-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;gap:5px}
-.pct-tab.active{background:rgba(230,57,70,.1);border-color:var(--red);color:var(--red);transform:scale(1.02)}
+.pct-tab.active{background:rgba(230,57,70,.1);border-color:var(--red);color:var(--red)}
 @keyframes pctFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .pct-panel-anim{animation:pctFadeIn .25s ease both}
 .pct-compare{display:flex;justify-content:center;gap:8px;font-size:11px;color:var(--t3);margin-top:10px;flex-wrap:wrap}
@@ -673,7 +673,7 @@ input[type=range]::-moz-range-thumb{
     </div>
   </div>
 
-    <!-- ROAD TO NEXT -->
+  <!-- ROAD TO NEXT -->
   <div class="block bt-red fade-up" id="block-road">
     <div class="block-title">Road to next level</div>
     <div id="road-body"></div>
@@ -960,12 +960,12 @@ function compute(){
   /* ── PERCENTILE ── */
   if(frD||wwD){
     function mkDonut(p,c){
-      var r=24,ci=2*Math.PI*r,d=ci*p/100,gap=ci-d;
-      var svg='<svg width="56" height="56" viewBox="0 0 56 56" style="transform:rotate(-90deg);display:block">';
-      svg+='<circle cx="28" cy="28" r="'+r+'" fill="none" stroke="var(--divider)" stroke-width="5"/>';
-      svg+='<circle cx="28" cy="28" r="'+r+'" fill="none" stroke="'+c+'" stroke-width="5" stroke-dasharray="'+d.toFixed(1)+' '+gap.toFixed(1)+'" stroke-linecap="round"/>';
-      svg+='</svg>';
-      return svg;
+      var r=24,ci=2*Math.PI*r,d=ci*p/100,g2=ci-d;
+      var sv='<svg width="56" height="56" viewBox="0 0 56 56" style="transform:rotate(-90deg);display:block">';
+      sv+='<circle cx="28" cy="28" r="'+r+'" fill="none" stroke="var(--divider)" stroke-width="5"/>';
+      sv+='<circle cx="28" cy="28" r="'+r+'" fill="none" stroke="'+c+'" stroke-width="5" stroke-dasharray="'+d.toFixed(1)+' '+g2.toFixed(1)+'" stroke-linecap="round"/>';
+      sv+='</svg>';
+      return sv;
     }
     function mkGrid(ref,lbl){
       var pT=pct(total,ref.Total,ref.StdTotal);
@@ -973,11 +973,11 @@ function compute(){
       var pBp=pct(bp,ref.Bench,ref.StdBench);
       var pDl=pct(dl,ref.Deadlift,ref.StdDeadlift);
       var hc=pCol(pT);
-      var hLbl=pT>=90?'Tu fais partie de l\'elite':pT>=75?'Tres bon niveau':pT>=50?'Au-dessus de la moyenne':pT>=25?'En dessous de la moyenne':'A developper';
+      var hLbl=pT>=90?'Elite':pT>=75?'Tres bon niveau':pT>=50?'Au-dessus de la moyenne':pT>=25?'En dessous de la moyenne':'A developper';
       var h='<div class="pct-hero">';
       h+='<div class="pct-hero-lbl">Positionnement · '+lbl+'</div>';
       h+='<div class="pct-hero-val" style="color:'+hc+'">Top '+(100-pT)+'%</div>';
-      h+='<div class="pct-hero-sub">'+hLbl+' dans ta categorie</div>';
+      h+='<div class="pct-hero-sub">'+hLbl+' dans ta catégorie</div>';
       h+='</div>';
       h+='<div class="pct-grid">';
       [{n:'Squat',p:pS,v:sq,a:ref.Squat},{n:'Bench',p:pBp,v:bp,a:ref.Bench},{n:'Deadlift',p:pDl,v:dl,a:ref.Deadlift}].forEach(function(x){
@@ -992,30 +992,25 @@ function compute(){
       h+='</div>';
       return h;
     }
-    /* Stat mondiale */
-
-    /* Ligne FR vs Monde */
     var compareHtml='';
     if(frD&&wwD){
       var pFR=pct(total,frD.Total,frD.StdTotal);
       var pWW=pct(total,wwD.Total,wwD.StdTotal);
       compareHtml='<div class="pct-compare">';
-      compareHtml+='<span>FR : <span class="pct-compare-val">Top '+(100-pFR)+'%</span></span>';
+      compareHtml+='<span>FR : <span class="pct-compare-val">Top '+(100-pFR)+'%</span></span>';
       compareHtml+='<span style="color:var(--border)">·</span>';
-      compareHtml+='<span>Monde : <span class="pct-compare-val">Top '+(100-pWW)+'%</span></span>';
+      compareHtml+='<span>Monde : <span class="pct-compare-val">Top '+(100-pWW)+'%</span></span>';
       compareHtml+='</div>';
     }
-    /* Source */
     var srcHtml='';
-    if(frD&&wwD) srcHtml='<div class="pct-footer">Moy. FR '+fmt(frD.Total)+' kg · Monde '+fmt(wwD.Total)+' kg · GL FR '+fmt(frD.Goodlift)+' pts<br><a href="https://www.openipf.org" target="_blank" rel="noopener" style="color:var(--t3);text-decoration:underline;text-underline-offset:2px;font-size:10px">openipf.org</a> · +400 000 competiteurs verifies</div>';
+    if(frD&&wwD) srcHtml='<div class="pct-footer">Moy. FR '+fmt(frD.Total)+' kg · Monde '+fmt(wwD.Total)+' kg · GL FR '+fmt(frD.Goodlift)+' pts<br><a href="https://www.openipf.org" target="_blank" rel="noopener" style="color:var(--t3);text-decoration:underline;text-underline-offset:2px;font-size:10px">openipf.org</a> · +400 000 compétiteurs vérifiés</div>';
     else if(wwD) srcHtml='<div class="pct-footer"><a href="https://www.openipf.org" target="_blank" rel="noopener" style="color:var(--t3);text-decoration:underline;text-underline-offset:2px;font-size:10px">openipf.org</a> · Moyennes mondiales</div>';
     else if(frD) srcHtml='<div class="pct-footer">Moyennes France · <a href="https://www.openipf.org" target="_blank" rel="noopener" style="color:var(--t3);text-decoration:underline;text-underline-offset:2px;font-size:10px">openipf.org</a></div>';
-    /* Rendu */
     var pBody=G('pct-body');
     if(frD&&wwD){
       var html='<div class="pct-tabs">';
-      html+='<div class="pct-tab active" id="pct-tab-fr"><span>&#127467;&#127479;</span> France</div>';
-      html+='<div class="pct-tab" id="pct-tab-ww"><span>&#127757;</span> Monde</div>';
+      html+='<div class="pct-tab active" id="pct-tab-fr">&#127467;&#127479; France</div>';
+      html+='<div class="pct-tab" id="pct-tab-ww">&#127757; Monde</div>';
       html+='</div>';
       html+='<div id="pct-panel-fr">'+mkGrid(frD,'France')+'</div>';
       html+='<div id="pct-panel-ww" style="display:none">'+mkGrid(wwD,'Monde')+'</div>';
@@ -1028,10 +1023,7 @@ function compute(){
       pBody.innerHTML=mkGrid(frD||wwD,frD?'France':'Monde')+compareHtml+srcHtml;
     }
     G('block-pct').style.display='';
-  } else {
-    G('block-pct').style.display='none';
-
-  }
+  } else { G('block-pct').style.display='none'; }
 
   /* ── RADAR ── */
   if(frD||wwD){
@@ -1077,13 +1069,13 @@ function compute(){
   if(frD){
     var lifts=[{n:'Squat',v:sq,a:frD.Squat},{n:'Bench',v:bp,a:frD.Bench},{n:'Deadlift',v:dl,a:frD.Deadlift}];
     lifts.forEach(function(l){ l.gap=l.a-l.v; });
-    lifts.forEach(function(l){ var s2=(frD['Std'+l.n]&&frD['Std'+l.n]>0)?frD['Std'+l.n]:l.a*0.20; l.z=(l.v-l.a)/s2; });
+    lifts.forEach(function(l){ var sig=(frD['Std'+l.n]&&frD['Std'+l.n]>0)?frD['Std'+l.n]:l.a*0.20; l.z=(l.v-l.a)/sig; });
     var focus=lifts.slice().sort(function(a,b){ return a.z-b.z; })[0];
     var strongest=lifts.slice().sort(function(a,b){ return b.z-a.z; })[0];
     var maxB=Math.max.apply(null,lifts.map(function(l){ return Math.max(l.v,l.a); }));
     var msg;
     if(focus.z>=-0.3){ msg='Tes trois mouvements sont au niveau ou au-dessus de la moyenne nationale. Travaille ton total global pour franchir le prochain niveau.'; }
-    else { var gapKg=Math.round(Math.abs(focus.gap)); if(focus.z>=-0.8){ msg='Ton <strong>'+focus.n+'</strong> est légèrement en retrait. Les athlètes de ta catégorie font en moyenne <strong>'+fmt(focus.a)+' kg</strong> — ramener ton '+focus.n.toLowerCase()+' à ce niveau te ferait gagner environ <strong>'+gapKg+' kg</strong> de total.'; } else { msg='Ton <strong>'+focus.n+'</strong> est ton point faible principal. Les athlètes de ta catégorie font en moyenne <strong>'+fmt(focus.a)+' kg</strong> — combler cet écart de <strong>'+gapKg+' kg</strong> est le levier le plus direct pour progresser au classement.'; } if(strongest.z>=0.5&&strongest.n!==focus.n){ msg+=' Ton <strong>'+strongest.n+'</strong> est ton point fort — capitalise dessus en compétition.'; } }
+    else { var gapKg=Math.round(Math.abs(focus.gap)); if(focus.z>=-0.8){ msg='Ton <strong>'+focus.n+'<\/strong> est élégèrement en retrait. Les athlètes de ta catégorie font en moyenne <strong>'+fmt(focus.a)+' kg<\/strong> — ramener ton '+focus.n.toLowerCase()+' à ce niveau te ferait gagner environ <strong>'+gapKg+' kg<\/strong> de total.'; } else { msg='Ton <strong>'+focus.n+'<\/strong> est ton point faible principal. Les athlètes de ta catégorie font en moyenne <strong>'+fmt(focus.a)+' kg<\/strong> — combler cet écart de <strong>'+gapKg+' kg<\/strong> est le levier le plus direct pour progresser au classement.'; } if(strongest.z>=0.5&&strongest.n!==focus.n){ msg+=' Ton <strong>'+strongest.n+'<\/strong> est ton point fort — capitalise dessus en compétition.'; } }
     function gc(gap){ return gap>10?'weak':gap<-5?'str':'ok'; }
     function gt(gap){ return gap>10?'−'+fmt(Math.abs(gap))+' kg':gap<-5?'+'+fmt(Math.abs(gap))+' kg':'≈ moy.'; }
     function bc(gc2){ return gc2==='weak'?'#E63946':gc2==='str'?'#3A86FF':'#2ECC71'; }
@@ -1114,21 +1106,21 @@ function compute(){
         '<div class="ratio-box"><div class="ratio-lbl">SQ / Total</div><div class="ratio-val" style="color:'+rCol(rS,sS)+'">'+rS+'%</div><div class="ratio-avg">moy. '+sS+'%</div></div>'+
         '<div class="ratio-box"><div class="ratio-lbl">BP / Total</div><div class="ratio-val" style="color:'+rCol(rB,sB)+'">'+rB+'%</div><div class="ratio-avg">moy. '+sB+'%</div></div>'+
         '<div class="ratio-box"><div class="ratio-lbl">DL / Total</div><div class="ratio-val" style="color:'+rCol(rD,sD)+'">'+rD+'%</div><div class="ratio-avg">moy. '+sD+'%</div></div>'+
-      '</div>'+(wwD?'<div class="coach-frww">'+(frD?'<span>FR : <strong>'+fmt(frD.Total)+' kg</strong></span><span style="color:var(--border)"> · </span>':'')+'<span>Monde : <strong>'+fmt(wwD.Total)+' kg</strong></span></div>':'');
+      '</div>';
     G('block-coach').style.display='';
   } else { G('block-coach').style.display='none'; }
 
   /* ── CTA FORCEUX ── */
   var CTAS={
-    'Départemental':{h:'Bienvenue dans la <span>communauté Forceux</span>',b:'Tout le monde démarre quelque part. Rejoins une communauté gratuite de forceux qui partagent leurs entraînements, posent leurs questions et célèbrent leurs PRs — quel que soit ton niveau.',pills:['Tous niveaux','Échanges','Entraide']},
-    'R3':{h:'Tu progresses — entourne-toi des <span>bonnes personnes</span>',b:"La progression est plus rapide quand on s'entraîne entouré d'athlètes qui comprennent les mêmes défis. Rejoins une communauté gratuite pour partager tes séances et apprendre des autres.",pills:['Partage de séances','Conseils','PRs']},
-    'R2':{h:'Rejoins des athlètes qui <span>comprennent tes défis</span>',b:"Plateaux, ratios déséquilibrés, gestion de la fatigue — ces sujets sont au cœur des échanges dans la communauté. Viens poser tes questions et partager tes victoires.",pills:['Analyse','Plateaux','Récupération']},
-    'R1':{h:'Le niveau national se construit <span>en communauté</span>',b:"Les athlètes R1 qui passent N2 ne le font jamais seuls. Rejoins des forceux ambitieux, partage tes PRs et accède aux discussions qui font progresser.",pills:['Niveau national','PRs','Stratégie']},
-    'N2':{h:'Partage ton niveau — <span>inspire la communauté</span>',b:"À ton niveau, tu as autant à apprendre qu'à transmettre. La communauté Forceux réunit des athlètes de tous niveaux qui échangent sur les détails qui font la différence.",pills:['Échanges','Technique','Partage']},
-    'N1':{h:"L'élite nationale a sa place dans la <span>communauté</span>",b:"Les meilleurs athlètes français de force athlétique se retrouvent ici. Partage ton expérience, échange sur la compétition et inspire la prochaine génération.",pills:['Élite française','Compétition','Mentorat']},
-    'Europe':{h:'Niveau européen — partage ton <span>expérience</span>',b:"Ta progression et tes performances sont une source d'inspiration pour toute une communauté. Rejoins-nous gratuitement et fais partie des références de Forceux Académie.",pills:['Référence','Partage','Communauté']},
-    'Monde':{h:'<span>Niveau mondial</span> — tu es une référence',b:"Rejoins la communauté Forceux et transmets ton expérience à des athlètes qui aspirent à ton niveau. Ta présence a de la valeur pour tous.",pills:['Top mondial','Transmission','Inspiration']}
-  }
+    'Départemental':{h:'Tu sais où tu en es. Maintenant, <span>construis un vrai système</span>',b:"Progresser en force athlétique sans méthode, c'est avancer à l'aveugle. Forceux Académie te donne le système complet pour devenir ton propre coach — formations, programmes, outils et communauté sur une seule plateforme.",pills:['Formations','Programmes','Outils']},
+    'R3':{h:'Les bases sont là. Il te faut <span>une vraie méthode</span>',b:"Beaucoup d'athlètes R3 stagnent parce qu'ils s'entraînent fort mais pas intelligemment. Forceux Académie te donne les outils pour structurer ta progression et passer les niveaux suivants sans tâtonner.",pills:['Programmation','Autocoaching','Progression']},
+    'R2':{h:'Pour passer R1, il te faut plus <span>qu’une bonne volonté</span>',b:"Le saut entre R2 et R1 ne se fait pas à la force du poignet. Il demande une vraie stratégie de programmation et une gestion fine de tes points faibles. C'est exactement ce que Forceux Académie t'apprend à faire.",pills:['Gestion des plateaux','Périodisation','Analyse']},
+    'R1':{h:'Tu touches au niveau national. <span>Ne laisse pas ça au hasard</span>',b:"Franchir N2 demande de la précision — sur l'intensité, le volume, et la gestion du pic de forme. Forceux Académie te donne le cadre pour préparer cette progression comme un athlète qui sait ce qu'il fait.",pills:['Niveau national','Pic de forme','Précision']},
+    'N2':{h:'Niveau national. Les gains viennent maintenant <span>des détails</span>',b:"À ce stade, chaque variable compte. Forceux Académie te donne accès aux formations avancées, aux outils d'analyse et aux programmes conçus pour les athlètes qui ne laissent plus rien au hasard.",pills:['Technique avancée','Optimisation','Outils']},
+    'N1':{h:"Tu es dans l'élite française. <span>Chaque détail compte</span>",b:"À ton niveau, la différence se joue sur des paramètres que la plupart des athlètes ignorent. Forceux Académie regroupe tout ce dont tu as besoin pour continuer à progresser sur une seule plateforme.",pills:['Elite','Analyse poussée','Performance']},
+    'Europe':{h:'Niveau européen — <span>le système complet</span> pour aller plus loin',b:"Forceux Académie est conçue pour les athlètes sérieux qui veulent prendre le contrôle total de leur progression. Formations, outils automatisés, programmes et communauté — tout au même endroit.",pills:['Haut niveau','Outils avancés','Communauté']},
+    'Monde':{h:'Performance mondiale. <span>Forceux Académie</span> est faite pour toi',b:"Que tu cherches à transmettre, à affiner les derniers détails ou à rester au sommet, Forceux Académie regroupe tout ce dont un athlète de haut niveau a besoin sur une seule plateforme.",pills:['Top niveau','Transmission','Plateforme complète']}
+  };
   var c2=CTAS[lv]||CTAS['R3'];
   var alert2='';
   if(frD){
@@ -1136,17 +1128,15 @@ function compute(){
     var wk=lif.slice().sort(function(a,b){ return (b.a-b.v)-(a.a-a.v); })[0];
     if(wk&&wk.a>wk.v) alert2='<div class="cta-alert">Ton <strong>'+wk.n+'</strong> est en dessous de la moyenne nationale dans ta catégorie — c\'est précisément ce type de point faible qui est traité en détail dans l\'académie.</div>';
   }
-  /* Init simulateur avec les valeurs calculées */
   simInit(gender,cat,wc,sq,bp,dl,lv);
-
   G('cta-box').innerHTML=
     '<div class="cta-eyebrow">Forceux Académie</div>'+
     '<div class="cta-headline">'+c2.h+'</div>'+
     '<div class="cta-body">'+c2.b+'</div>'+
     alert2+
     '<div class="cta-pills">'+c2.pills.map(function(p){ return '<span class="cta-pill">'+p+'</span>'; }).join('')+'</div>'+
-    '<a href="https://whop.com/forceux-academie/rejoindre-gratuit/" target="_blank" rel="noopener" class="cta-btn"><span>Rejoindre la communauté</span><span class="cta-btn-arrow">→</span></a>'+
-    '<div class="cta-note">100% gratuit · Accès instantané</div>';
+    '<a href="https://www.forceux.fr/" target="_blank" rel="noopener" class="cta-btn"><span>Découvrir Forceux Académie</span><span class="cta-btn-arrow">→</span></a>'+
+    '<div class="cta-note">forceux.fr</div>';
 }
 
 /* ═══════ COUNT-UP ANIMATION ═══════ */
@@ -1255,13 +1245,10 @@ function simReset(){
 function switchPctTab(scope){
   var fr=G('pct-panel-fr'),ww=G('pct-panel-ww'),tFr=G('pct-tab-fr'),tWw=G('pct-tab-ww');
   if(!fr||!ww) return;
-  var target=scope==='fr'?fr:ww;
-  var hide=scope==='fr'?ww:fr;
+  var target=scope==='fr'?fr:ww, hide=scope==='fr'?ww:fr;
   hide.style.display='none';
   target.style.display='';
-  target.classList.remove('pct-panel-anim');
-  void target.offsetWidth;
-  target.classList.add('pct-panel-anim');
+  target.classList.remove('pct-panel-anim'); void target.offsetWidth; target.classList.add('pct-panel-anim');
   if(scope==='fr'){tFr.classList.add('active');tWw.classList.remove('active');}
   else{tFr.classList.remove('active');tWw.classList.add('active');}
 }
